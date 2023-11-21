@@ -2,7 +2,7 @@
 const { absolutePath } = require('./functions')
 
 
-function mdLinks(path) {
+const mdLinks = (path) => {
   return new Promise((resolve, reject) => {
     const isAbsolutePath = absolutePath(path);
     
@@ -10,6 +10,4 @@ function mdLinks(path) {
   reject('no hay links')
 });
 }
-module.exports = {
-  mdLinks
-};
+module.exports = mdLinks;

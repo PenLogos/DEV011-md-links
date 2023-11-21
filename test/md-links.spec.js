@@ -1,10 +1,7 @@
-const mdLinks = require('../src');
+const mdLinks = require("../src/index");
 
-
-describe('mdLinks', () => {
-
-  it('debería retornar una promesa', () => {
-    expect(mdLinks).toBe(typeof Promise);
+describe("mdLinks", () => {
+  it("debería retornar una promesa", () => {
+    expect(typeof mdLinks).toBe(typeof Promise);
   });
-
 });
