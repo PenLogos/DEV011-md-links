@@ -9,7 +9,7 @@ const mdLinks = (path) => {
     if (fileExists) {
       resolve(isAbsolutePath);
     } else {
-      reject("no hay links");
+      reject(new Error("archivo no existe"));
     };
   });
 };
