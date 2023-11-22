@@ -10,4 +10,6 @@ const mdLinks = (path) => {
   reject('no hay links')
 });
 }
-module.exports = mdLinks;
+module.exports = {
+  mdLinks
+}
