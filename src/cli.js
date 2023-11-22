@@ -1,4 +1,4 @@
 const { mdLinks } = require('./index')
-mdLinks('README')
+mdLinks('REDME.md')
 .then(res => console.log(res))
 .catch(error => console.log(error))
