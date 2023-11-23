@@ -1,28 +1,58 @@
 // const { error } = require('console');
+// const fs = require('fs');
+// const MarkdownIt = require("markdown-it")();
 const { absolutePath } = require("./functions");
 const { fileExistence } = require("./functions");
 const { pathExtension } = require("./functions");
 const { fileReading } = require("./functions");
-
+// const { fileRendered } = require("./functions");
+const { fileParsing } = require("./functions");
 
 const mdLinks = (path) => {
   return new Promise((resolve, reject) => {
-    const fileExists = fileExistence(path);
-    const isAbsolutePath = absolutePath(path);
-    const fileExtension = pathExtension(path);
-    const aloudExtensions = (fileExtension === ('.md'||'.mkd'||'.mdwn'||'.mdown'||'.mdtxt'||'.mdtext'||'.markdown'||'.text'));
-    const fileRead = fileReading(path);
-    if (fileExists && aloudExtensions) {
-      resolve(fileRead);
+    const file = absolutePath(path);
+    const fileExists = fileExistence(file);
+    const fileExtension = pathExtension(file);
+    const allowedExtensions =
+      fileExtension ===
+      (".md" ||
+        ".mkd" ||
+        ".mdwn" ||
+        ".mdown" ||
+        ".mdtxt" ||
+        ".mdtext" ||
+        ".markdown" ||
+        ".text");
+    if (fileExists && allowedExtensions) {
+      fileReading(file).then((res) => {
+        fileRead = res;
+        const parseFile = fileParsing(fileRead);
+        console.log(fileParsing(fileRead), 'parse');
+
+        let linksProperties = [];
+
+        parseFile.forEach((token, index) => {
+          if (token.type === 'inline') {
+            const paragraphContent = token.content;
+            const regex = /https?:\/\/\S+/g;
+            const matches = paragraphContent.match(regex);
+        
+            if (matches) {
+              matches.forEach(match => {
+                linksProperties.push({ href: match, file: absolutePath(path) });
+              });
+            }
+          }
+        });
+        resolve(linksProperties);
+      });
+    } else if (fileExists === false && allowedExtensions) {
+      reject(new Error("La ruta no existe"));
+    } else {
+      reject(new Error("No es un archivo markdown"));
     }
-    else if(fileExists === false && aloudExtensions) {
-      reject(new Error('La ruta no existe'))
-    }else {
-      reject(new Error('No es un archivo markdown'))
-    };
   });
 };
-
 module.exports = {
-  mdLinks
+  mdLinks,
 };
