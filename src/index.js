@@ -34,12 +34,13 @@ const mdLinks = (path) => {
         parseFile.forEach((token, index) => {
           if (token.type === 'inline') {
             const paragraphContent = token.content;
-            const regex = /https?:\/\/\S+/g;
-            const matches = paragraphContent.match(regex);
-            if (matches) {
-              matches.forEach(match => {
-                linksProperties.push({ href: match, file: absolutePath(path) });
-              });
+            const regex = /\[([^\]]+)\]\((https?:\/\/[^\s]+)\)/g;
+      
+            let match;
+            while ((match = regex.exec(paragraphContent)) !== null) {
+              const text = match[1];
+              const href = match[2];
+              linksProperties.push({ href, text, file: file });
             }
           }
         });
