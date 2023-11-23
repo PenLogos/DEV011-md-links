@@ -27,7 +27,7 @@ const mdLinks = (path) => {
       fileReading(file).then((res) => {
         fileRead = res;
         const parseFile = fileParsing(fileRead);
-        console.log(fileParsing(fileRead), 'parse');
+        console.log(parseFile, 'parse');
 
         let linksProperties = [];
 
@@ -36,7 +36,6 @@ const mdLinks = (path) => {
             const paragraphContent = token.content;
             const regex = /https?:\/\/\S+/g;
             const matches = paragraphContent.match(regex);
-        
             if (matches) {
               matches.forEach(match => {
                 linksProperties.push({ href: match, file: absolutePath(path) });

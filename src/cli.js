@@ -1,4 +1,4 @@
 const { mdLinks } = require('./index')
-mdLinks('Prueba-con-links.md')
+mdLinks('.././Archivos-de-prueba/Plantilla-README.md')
 .then(res => console.log(res))
 .catch(error => console.log(error))
