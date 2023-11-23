@@ -13,7 +13,6 @@ const fileReading = (path) => fsPromise.readFile(path, { encoding: 'utf8' })
 .catch(err => {
   console.error(err.message);
 });
-// const fileRendered = (content) => MarkdownIt.render(content)
 const fileParsing = (render) => md.parse(render);
 
 module.exports = {
@@ -22,5 +21,4 @@ module.exports = {
   pathExtension,
   fileReading,
   fileParsing,
-  // fileRendered
 };

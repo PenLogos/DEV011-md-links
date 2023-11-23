@@ -1,11 +1,7 @@
-// const { error } = require('console');
-// const fs = require('fs');
-// const MarkdownIt = require("markdown-it")();
 const { absolutePath } = require("./functions");
 const { fileExistence } = require("./functions");
 const { pathExtension } = require("./functions");
 const { fileReading } = require("./functions");
-// const { fileRendered } = require("./functions");
 const { fileParsing } = require("./functions");
 
 const mdLinks = (path) => {
@@ -27,7 +23,6 @@ const mdLinks = (path) => {
       fileReading(file).then((res) => {
         fileRead = res;
         const parseFile = fileParsing(fileRead);
-        console.log(parseFile, 'parse');
 
         let linksProperties = [];
 
