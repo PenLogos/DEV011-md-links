@@ -4,7 +4,7 @@ const { pathExtension } = require("./functions");
 const { fileReading } = require("./functions");
 const { fileParsing } = require("./functions");
 
-const mdLinks = (path) => {
+const mdLinks = (path, validate) => {
   return new Promise((resolve, reject) => {
     const file = absolutePath(path);
     const fileExists = fileExistence(file);
@@ -35,7 +35,7 @@ const mdLinks = (path) => {
             while ((match = regex.exec(paragraphContent)) !== null) {
               const text = match[1];
               const href = match[2];
-              linksProperties.push({ href, text, file: file });
+              linksProperties.push({ href, text, file: file, status, message });
             }
           }
         });

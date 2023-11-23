@@ -10,9 +10,6 @@ const pathExtension = (path) => pathModule.extname(path);
 const fileReading = (path) => fsPromise.readFile(path, { encoding: 'utf8' })
 .then(res => {
   return res})
-.catch(err => {
-  console.error(err.message);
-});
 const fileParsing = (render) => md.parse(render);
 
 module.exports = {
