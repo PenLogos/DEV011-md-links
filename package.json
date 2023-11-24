@@ -30,5 +30,7 @@
     "test": "jest",
     "install": "echo postinstall script executed successfully"
   },
-  "bin": "./src/cli.js"
+  "bin": {
+    "mdLinks": "./src/cli.js"
+  }
 }
