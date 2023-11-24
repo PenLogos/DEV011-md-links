@@ -3,6 +3,7 @@ const { fileExistence } = require("./functions");
 const { pathExtension } = require("./functions");
 const { fileReading } = require("./functions");
 const { fileParsing } = require("./functions");
+const { codeStatus } = require("./validate");
 
 const mdLinks = (path, validate) => {
   return new Promise((resolve, reject) => {
@@ -27,19 +28,30 @@ const mdLinks = (path, validate) => {
         let linksProperties = [];
 
         parseFile.forEach((token, index) => {
-          if (token.type === 'inline') {
+          if (token.type === "inline") {
             const paragraphContent = token.content;
             const regex = /\[([^\]]+)\]\((https?:\/\/[^\s]+)\)/g;
-      
+
             let match;
             while ((match = regex.exec(paragraphContent)) !== null) {
               const text = match[1];
               const href = match[2];
-              linksProperties.push({ href, text, file: file, status, message });
+
+              if (validate) {
+                codeStatus(href)
+                .then((data) => 
+                  linksProperties.push({ href, text, file: file, status: data, ok: 'ok' }))
+                .catch((error) =>
+                  linksProperties.push({ href, text, file: file, status: error, ok: 'fail' }));
+              } else {
+                linksProperties.push({ href, text, file: file });
+              }
             }
           }
         });
-        resolve(linksProperties);
+        setTimeout(() => {
+          resolve(linksProperties);
+        }, 5000);
       });
     } else if (fileExists === false && allowedExtensions) {
       reject(new Error("La ruta no existe"));
