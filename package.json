@@ -24,6 +24,6 @@
   },
   "scripts": {
     "test": "jest",
-    "install": "npm install"
+    "install": "npm"
   }
 }
