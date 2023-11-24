@@ -11,15 +11,16 @@ const mdLinks = (path, validate) => {
     const fileExists = fileExistence(file);
     const fileExtension = pathExtension(file);
     const allowedExtensions =
-      fileExtension ===
-      (".md" ||
-        ".mkd" ||
-        ".mdwn" ||
-        ".mdown" ||
-        ".mdtxt" ||
-        ".mdtext" ||
-        ".markdown" ||
-        ".text");
+      [
+        ".md",
+          ".mkd",
+          ".mdwn",
+          ".mdown",
+          ".mdtxt",
+          ".mdtext",
+          ".markdown",
+          ".text"
+      ].includes(fileExtension);
     if (fileExists && allowedExtensions) {
       fileReading(file).then((res) => {
         fileRead = res;
@@ -39,10 +40,24 @@ const mdLinks = (path, validate) => {
 
               if (validate) {
                 codeStatus(href)
-                .then((data) => 
-                  linksProperties.push({ href, text, file: file, status: data, ok: 'ok' }))
-                .catch((error) =>
-                  linksProperties.push({ href, text, file: file, status: error, ok: 'fail' }));
+                  .then((data) =>
+                    linksProperties.push({
+                      href,
+                      text,
+                      file: file,
+                      status: data,
+                      ok: "ok",
+                    })
+                  )
+                  .catch((error) =>
+                    linksProperties.push({
+                      href,
+                      text,
+                      file: file,
+                      status: error,
+                      ok: "fail",
+                    })
+                  );
               } else {
                 linksProperties.push({ href, text, file: file });
               }
@@ -51,7 +66,7 @@ const mdLinks = (path, validate) => {
         });
         setTimeout(() => {
           resolve(linksProperties);
-        }, 5000);
+        }, 4000);
       });
     } else if (fileExists === false && allowedExtensions) {
       reject(new Error("La ruta no existe"));

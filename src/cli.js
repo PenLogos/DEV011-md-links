@@ -1,4 +1,4 @@
 const { mdLinks } = require('./index')
-mdLinks('./Archivos-de-prueba/Prueba-con-links.md', true)
+mdLinks('./Archivos-de-prueba/Prueba-simple.text', true)
 .then(res => console.log(res))
 .catch(error => console.log(error))
