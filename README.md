@@ -32,19 +32,19 @@ previa de Node.js.
 
 ## 3. Implementación
 
-
+  
 const mdLinks = require('md-links')
-
+  
 
 La API permite la importación de módulos a través de require. Ejemplo de implementación:
-
+  
 
 const validateFileLinks = require("md-links")
 
-validateFileLinks.mdLinks('./Archivos-de-prueba-copia/Prueba-con-links.md', true, true)
+validateFileLinks.mdLinks('./Archivos-de-prueba-copia/Prueba-con-links.md', true, true)  
 .then(res => console.log(res))
 .catch(error => console.log(error))
-
+  
 
 En este ejemplo, la importación del método y su asignación a la variable validateFileLinks
 permiten hacer uso de la función principal. Admite 3 argumentos: el primero, la ruta relativa
@@ -55,10 +55,10 @@ lo que son parámetros opcionales, que de no llamarse, el módulo toma como fals
 
 Los demás módulos de la librería también pueden importarse haciendo uso de las rutas 
 relativas. Ejemplo de importación de otro módulo:
-
+  
 
 const { codeStatus } require('./md-links/src/validate.js')
-
+  
 
 ## 4. Manejo del módulo desde línea de comandos
 
@@ -68,13 +68,13 @@ implementación, sólo con la instalación. Permite el mismo uso de los argument
 
 
 mdLinks 'rutarelativa.md' //arroja los links encontrados, la ruta absoluta del archivo y el texto del link.//
-
+  
 
 mdLinks 'rutarelativa.md' --validate //además añade el estado del link (200, por ejemplo) y el estado 'ok' si funciona 'fail' si está roto.//
-
+  
 
 mdLinks 'rutarelativa.md' --stats //entrega el número total de enlaces análizados, de enalces funcionales y de enlaces rotos.//
-
+  
 
 Admite también ambos argumentos al tiempo, dando toda la información en conjunto.
 
