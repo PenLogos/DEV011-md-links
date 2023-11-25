@@ -34,7 +34,7 @@ previa de Node.js.
 ## 3. Implementación  
 
   
-const mdLinks = require('md-links')  
+const mdLinks = require('penlogos-md-links')  
   
 
 La API permite la importación del módulo principal a través de require. 
