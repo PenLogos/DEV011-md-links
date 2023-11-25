@@ -19,10 +19,10 @@ validación 'validate.js', un módulo que da estadísticas sobre la validación 
 archivo que permite la implementación de la CLI y el uso global de la función principal
 'cli.js'.
 
-## 2. Instalación
+## 2. Instalación  
 
 
-npm install Penlogos/DEV011-md-links
+npm install Penlogos/DEV011-md-links  
 
 
 Se usa [Node.js](https://nodejs.org/en) como entorno de ejecución. La API está disponible
@@ -30,20 +30,20 @@ para instalarse directamente desde Github ejecutando el comando desde la termina
 repositorio local inicializado con un package.json básico. Sólo se requiere la instalación 
 previa de Node.js.
 
-## 3. Implementación
+## 3. Implementación  
 
   
-const mdLinks = require('md-links')
+const mdLinks = require('md-links')  
   
 
-La API permite la importación de módulos a través de require. Ejemplo de implementación:
+La API permite la importación de módulos a través de require. Ejemplo de implementación:  
   
 
 const validateFileLinks = require("md-links")
 
 validateFileLinks.mdLinks('./Archivos-de-prueba-copia/Prueba-con-links.md', true, true)  
-.then(res => console.log(res))
-.catch(error => console.log(error))
+.then(res => console.log(res))  
+.catch(error => console.log(error))  
   
 
 En este ejemplo, la importación del método y su asignación a la variable validateFileLinks
@@ -54,29 +54,29 @@ estadísticas de la validación en consola. Estos dos últimos arrojan valores b
 lo que son parámetros opcionales, que de no llamarse, el módulo toma como false.
 
 Los demás módulos de la librería también pueden importarse haciendo uso de las rutas 
-relativas. Ejemplo de importación de otro módulo:
+relativas. Ejemplo de importación de otro módulo:  
   
 
-const { codeStatus } require('./md-links/src/validate.js')
+const { codeStatus } require('./md-links/src/validate.js')  
   
 
 ## 4. Manejo del módulo desde línea de comandos
 
 El módulo permite la utilización de la función mdLinks directamente desde la línea de
 comandos, desde cualquier ubicación dentro del repositorio local sin necesidad de ninguna 
-implementación, sólo con la instalación. Permite el mismo uso de los argumentos, así:
+implementación, sólo con la instalación. Permite el mismo uso de los argumentos, así:  
 
 
-mdLinks 'rutarelativa.md' //arroja los links encontrados, la ruta absoluta del archivo y el texto del link.//
+mdLinks 'rutarelativa.md' //arroja los links encontrados, la ruta absoluta del archivo y el texto del link.//  
   
 
-mdLinks 'rutarelativa.md' --validate //además añade el estado del link (200, por ejemplo) y el estado 'ok' si funciona 'fail' si está roto.//
+mdLinks 'rutarelativa.md' --validate //además añade el estado del link (200, por ejemplo) y el estado 'ok' si funciona 'fail' si está roto.//  
   
 
-mdLinks 'rutarelativa.md' --stats //entrega el número total de enlaces análizados, de enalces funcionales y de enlaces rotos.//
+mdLinks 'rutarelativa.md' --stats //entrega el número total de enlaces análizados, de enalces funcionales y de enlaces rotos.//  
   
 
-Admite también ambos argumentos al tiempo, dando toda la información en conjunto.
+Admite también ambos argumentos al tiempo, dando toda la información en conjunto.  
 
 ## 5. Dependencias
 
