@@ -5,8 +5,9 @@
 * [1. ¿Qué es esta librería?](#1-¿Qué-es-esta-librería?)
 * [2. Instalación](#2-instalación)
 * [3. Implementación](#3-implementación)
-* [4. Manejo del módulo desde línea de comandos](#4-manejo-del-módulo-desde-línea-de-comandos)
-* [5. Dependencias](#5-dependencias)
+* [4. Módulos auxiliares](#4-módulos-auxiliares)
+* [5. Manejo del módulo desde línea de comandos](#4-manejo-del-módulo-desde-línea-de-comandos)
+* [6. Dependencias](#5-dependencias)
 
 ***
 
@@ -22,7 +23,7 @@ archivo que permite la implementación de la CLI y el uso global de la función 
 ## 2. Instalación  
 
 
-npm install Penlogos/DEV011-md-links  
+npm install Penlogos/DEV011-md-links ó npm i penlogos-md-links
 
 
 Se usa [Node.js](https://nodejs.org/en) como entorno de ejecución. La API está disponible
@@ -36,7 +37,9 @@ previa de Node.js.
 const mdLinks = require('md-links')  
   
 
-La API permite la importación de módulos a través de require. Ejemplo de implementación:  
+La API permite la importación del módulo principal a través de require. 
+
+Ejemplo de implementación:  
   
 
 const validateFileLinks = require("md-links")
@@ -54,13 +57,37 @@ estadísticas de la validación en consola. Estos dos últimos arrojan valores b
 lo que son parámetros opcionales, que de no llamarse, el módulo toma como false.
 
 Los demás módulos de la librería también pueden importarse haciendo uso de las rutas 
-relativas. Ejemplo de importación de otro módulo:  
+relativas. Ejemplo de importación e implementación de otro módulo:  
   
+validate.js:
 
-const { codeStatus } require('./md-links/src/validate.js')  
+const { codeStatus } require('./node_modules/md-links/src/validate.js')
+
+codestatus('https://www.link-no-encontrado.com') //muestra en la terminal el código HTTP//  
+.then(res => console.log(res))  
+.catch(error => console.log(error))
+
+## 4. Módulos auxiliares
+
+Estos son los demás módulos que se pueden importar para utlizarse con require('rutarelativa')
   
+function.js:
 
-## 4. Manejo del módulo desde línea de comandos
+absolutePath() //devuelve la ruta absoluta de una ruta relativa//
+
+fileExistence() //verifica si la ruta existe en el disco duro//
+
+pathExtension() //valida si un archivo es de tipo markdown//
+
+fileReading() //devuelve el contenido de un archivo de tipo markdown//
+
+fileParsing() //'parsea' un contenido markdown en un array de tokens//
+
+stats.js:
+
+statsData() //cuenta la propiedad ok con valor 'ok' de un objeto en todas las posiciones de un array//
+
+## 5. Manejo del módulo desde línea de comandos
 
 El módulo permite la utilización de la función mdLinks directamente desde la línea de
 comandos, desde cualquier ubicación dentro del repositorio local sin necesidad de ninguna 
@@ -78,7 +105,7 @@ mdLinks 'rutarelativa.md' --stats //entrega el número total de enlaces análiza
 
 Admite también ambos argumentos al tiempo, dando toda la información en conjunto.  
 
-## 5. Dependencias
+## 6. Dependencias
 
 El paquete se vale de los [!CommonsJs-Modules](https://nodejs.org/api/path.html) y los [fs-Modules](https://nodejs.org/api/fs.html) de Node para las 
 funciones auxiliares del módulo principal. También se usa la librería de parseado 
