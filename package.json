@@ -1,5 +1,5 @@
 {
-  "name": "md-links",
+  "name": "penlogos-md-links",
   "version": "0.1.0",
   "description": "valida links en archivos markdown",
   "main": "src/index.js",
