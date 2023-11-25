@@ -10,24 +10,14 @@ const mdLinks = (path, validate) => {
     const file = absolutePath(path);
     const fileExists = fileExistence(file);
     const fileExtension = pathExtension(file);
-    const allowedExtensions =
-      [
-        ".md",
-          ".mkd",
-          ".mdwn",
-          ".mdown",
-          ".mdtxt",
-          ".mdtext",
-          ".markdown",
-          ".text"
-      ].includes(fileExtension);
+    const allowedExtensions = [".md", ".mkd", ".mdwn", ".mdown", ".mdtxt", ".mdtext", ".markdown", ".text"].includes(fileExtension);
     if (fileExists && allowedExtensions) {
       fileReading(file).then((res) => {
         fileRead = res;
         const parseFile = fileParsing(fileRead);
-
+        
         let linksProperties = [];
-
+        
         parseFile.forEach((token, index) => {
           if (token.type === "inline") {
             const paragraphContent = token.content;
@@ -40,24 +30,8 @@ const mdLinks = (path, validate) => {
 
               if (validate) {
                 codeStatus(href)
-                  .then((data) =>
-                    linksProperties.push({
-                      href,
-                      text,
-                      file: file,
-                      status: data,
-                      ok: "ok",
-                    })
-                  )
-                  .catch((error) =>
-                    linksProperties.push({
-                      href,
-                      text,
-                      file: file,
-                      status: error,
-                      ok: "fail",
-                    })
-                  );
+                  .then((data) => linksProperties.push({href, text, file: file, status: data, ok: "ok",}))
+                  .catch((error) => linksProperties.push({href, text, file: file, status: error, ok: "fail",}));
               } else {
                 linksProperties.push({ href, text, file: file });
               }
