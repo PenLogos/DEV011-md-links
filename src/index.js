@@ -17,39 +17,40 @@ const mdLinks = (path, validate, stats) => {
         fileRead = res;
         const parseFile = fileParsing(fileRead);
         
+        let codeStatusPromises = []
         let linksProperties = [];
-        let validateLinksProperties= []
+        let validateLinksProperties = []
         
         parseFile.forEach((token, index) => {
           const paragraphContent = token.content;
           const regex = /\[([^\]]+)\]\((https?:\/\/[^\s]+)\)/g;
-          console.log(paragraphContent);
           
           let match;
           while ((match = regex.exec(paragraphContent)) !== null) {
             const text = match[1];
             const href = match[2];
-            codeStatus(href)
+            const linkPromise = codeStatus(href)
             .then((data) => validateLinksProperties.push({href, text, file: file, status: data, ok: "ok",}))
             .catch((error) => validateLinksProperties.push({href, text, file: file, status: error, ok: "fail",}));
             if (validate) {
-              codeStatus(href)
+              const linkPromise2 = codeStatus(href)
               .then((data) => linksProperties.push({href, text, file: file, status: data, ok: "ok",}))
-              .catch((error) => linksProperties.push({href, text, file: file, status: error, ok: "fail",}));
+              .catch((error) => linksProperties.push({href, text, file: file, status: error, ok: "fail",}))
+              codeStatusPromises.push(linkPromise2);
             } else {
               linksProperties.push({ href, text, file: file });
             }
-            
+            codeStatusPromises.push(linkPromise)
           }
         });
-        setTimeout(() => {
+        Promise.all(codeStatusPromises).then(() => {
           if (stats) {
-            const showStats = statsData(validateLinksProperties)
-            resolve( {linksProperties, showStats} );
+            const showStats = statsData(validateLinksProperties);
+            resolve({ linksProperties, showStats });
           } else {
-            resolve(linksProperties)
+            resolve(linksProperties);
           }
-        }, 3000);
+        });
       });
     } else if (fileExists === false && allowedExtensions) {
       reject(new Error("La ruta no existe"));
