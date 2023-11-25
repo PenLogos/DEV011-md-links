@@ -52,13 +52,14 @@ const mdLinks = (path, validate, stats) => {
           }
         });
       });
-    } else if (fileExists === false && allowedExtensions) {
+    } else if (!fileExists && allowedExtensions) {
       reject(new Error("La ruta no existe"));
     } else {
       reject(new Error("No es un archivo markdown"));
     }
   });
 };
+
 module.exports = {
   mdLinks,
 };
