@@ -49,7 +49,7 @@ const mdLinks = (path, validate, stats) => {
           } else {
             resolve(linksProperties)
           }
-        }, 5000);
+        }, 3000);
       });
     } else if (fileExists === false && allowedExtensions) {
       reject(new Error("La ruta no existe"));

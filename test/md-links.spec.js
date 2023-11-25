@@ -38,7 +38,7 @@ describe("mdLinks", () => {
       },
     ]);
   });
-  it('debería retornar un array con tres objetos y tres propiedades para un archivo markdown con tres enlaces si el segundo parámetro es true, pero la última propiedad debería retornar "fail"', () => {
+  it('debería retornar un array con tres objetos y tres propiedades para un archivo markdown con tres enlaces si el segundo parámetro es true, pero la última propiedad debería retornar "fail" si el enlace está roto', () => {
     return expect(mdLinks('./Archivos-de-prueba/Prueba-con-links.md', true)).resolves.toStrictEqual([
       {
         "file": "C:\\Users\\Federico\\Documents\\Programación\\DEV011-md-links\\Archivos-de-prueba\\Prueba-con-links.md",
@@ -72,5 +72,27 @@ describe("mdLinks", () => {
   });
   it('debería retornar un error si no es un archivo markdown', () => {
     return expect(mdLinks('./functions.js')).rejects.toThrow('No es un archivo markdown');
+  });
+  it('debería retornar un objeto que contiene la data de los links y un objeto con tres propiedades, en donde cuente el toal de links, los links "ok" y los links "fail", para un texto con dos links funcionando y uno roto, si se llama la función con --stats y sin validate', () => {
+    return expect(mdLinks('./Archivos-de-prueba/Prueba-con-links.md', false, true)).resolves.toStrictEqual({
+      linksProperties: [
+        {
+          href: 'https://www.ionos.es/digitalguide/paginas-web/desarrollo-web/tutorial-de-markdown/',
+          text: 'primero sobre markdown',
+          file: 'C:\\Users\\Federico\\Documents\\Programación\\DEV011-md-links\\Archivos-de-prueba\\Prueba-con-links.md'
+        },
+        {
+          href: 'https://developer.mozilla.org/es/docs/Web/API',
+          text: 'ahora uno sobre API',
+          file: 'C:\\Users\\Federico\\Documents\\Programación\\DEV011-md-links\\Archivos-de-prueba\\Prueba-con-links.md'
+        },
+        {
+          href: 'https://www.ionos.es/digitalguide/paginas-web/desarrollo-web/tutorial-de-markdown/roto/',
+          text: 'otro roto',
+          file: 'C:\\Users\\Federico\\Documents\\Programación\\DEV011-md-links\\Archivos-de-prueba\\Prueba-con-links.md'
+        }
+      ],
+      showStats: { TotalLinks: 3, OkLinks: 2, FailLinks: 1 }
+    })
   });
 });
