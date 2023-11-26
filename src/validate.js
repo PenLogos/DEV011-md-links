@@ -1,11 +1,11 @@
-const codeStatus = (href) => {
+const codeStatus = (url) => {
   return new Promise((resolve, reject) => {
-    fetch(href)
+    fetch(url)
       .then((res) => {
         if (res.ok) {
           return resolve(res.status);
         } else {
-          return Promise.reject(res.status);
+          return reject(res.status);
         }
       })
       .catch((error) => {
@@ -15,5 +15,5 @@ const codeStatus = (href) => {
 };
 
 module.exports = {
-  codeStatus,
+  codeStatus
 };
