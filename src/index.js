@@ -17,16 +17,16 @@ const mdLinks = (path, validate, stats) => {
         fileRead = res;
         const parseFile = fileParsing(fileRead);
         
-        let codeStatusPromises = []
         let linksProperties = [];
         let validateLinksProperties = []
+        let codeStatusPromises = []
         
         parseFile.forEach((token, index) => {
           const paragraphContent = token.content;
           const regex = /\[([^\]]+)\]\((https?:\/\/[^\s]+)\)/g;
           
           let match;
-          while ((match = regex.exec(paragraphContent)) !== null) {
+          while ((match = regex.exec(paragraphContent)) !== null) { 
             const text = match[1];
             const href = match[2];
             const linkPromise = codeStatus(href)
@@ -61,5 +61,5 @@ const mdLinks = (path, validate, stats) => {
 };
 
 module.exports = {
-  mdLinks,
+  mdLinks
 };

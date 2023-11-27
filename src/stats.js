@@ -14,5 +14,5 @@ const statsData = (array) => {
 };
 
 module.exports = {
-  statsData,
+  statsData
 };
