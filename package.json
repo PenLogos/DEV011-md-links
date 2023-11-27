@@ -1,6 +1,6 @@
 {
   "name": "penlogos-md-links",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "valida links en archivos markdown",
   "main": "src/index.js",
   "author": "Penélope Logos <penelopelogos@gmail.com> (https://github.com/PenLogos)",
