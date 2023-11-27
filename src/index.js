@@ -35,12 +35,12 @@ const mdLinks = (path, validate, stats) => {
             if (validate) {
               const linkPromise2 = codeStatus(href)
               .then((data) => linksProperties.push({href, text, file: file, status: data, ok: "ok",}))
-              .catch((error) => linksProperties.push({href, text, file: file, status: error, ok: "fail",}))
+              .catch((error) => linksProperties.push({href, text, file: file, status: error, ok: "fail",}));
               codeStatusPromises.push(linkPromise2);
             } else {
               linksProperties.push({ href, text, file: file });
             }
-            codeStatusPromises.push(linkPromise)
+            codeStatusPromises.push(linkPromise);
           }
         });
         Promise.all(codeStatusPromises).then(() => {
