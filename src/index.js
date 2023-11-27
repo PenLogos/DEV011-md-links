@@ -21,7 +21,7 @@ const mdLinks = (path, validate, stats) => {
         let validateLinksProperties = []
         let codeStatusPromises = []
         
-        parseFile.forEach((token, index) => {
+        parseFile.forEach((token) => {
           const paragraphContent = token.content;
           const regex = /\[([^\]]+)\]\((https?:\/\/[^\s]+)\)/g;
           
@@ -30,12 +30,12 @@ const mdLinks = (path, validate, stats) => {
             const text = match[1];
             const href = match[2];
             const linkPromise = codeStatus(href)
-            .then((data) => validateLinksProperties.push({href, text, file: file, status: data, ok: "ok",}))
-            .catch((error) => validateLinksProperties.push({href, text, file: file, status: error, ok: "fail",}));
+              .then((data) => validateLinksProperties.push({href, text, file: file, status: data, ok: "ok",}))
+              .catch((error) => validateLinksProperties.push({href, text, file: file, status: error, ok: "fail",}));
             if (validate) {
               const linkPromise2 = codeStatus(href)
-              .then((data) => linksProperties.push({href, text, file: file, status: data, ok: "ok",}))
-              .catch((error) => linksProperties.push({href, text, file: file, status: error, ok: "fail",}));
+                .then((data) => linksProperties.push({href, text, file: file, status: data, ok: "ok",}))
+                .catch((error) => linksProperties.push({href, text, file: file, status: error, ok: "fail",}));
               codeStatusPromises.push(linkPromise2);
             } else {
               linksProperties.push({ href, text, file: file });

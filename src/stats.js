@@ -7,7 +7,7 @@ const statsData = (array) => {
     if (array[i].ok === "ok") {
       okLinks++;
     } else {
-        failLinks++
+      failLinks++
     }
   }
   return { TotalLinks: totalLinks, OkLinks: okLinks, FailLinks: failLinks };

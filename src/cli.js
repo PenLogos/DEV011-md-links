@@ -8,5 +8,5 @@ const stats = process.argv.includes('--stats');
 console.log(link, validate, stats);
 
 mdLinks(link, validate, stats)
-.then(res => console.log(res))
-.catch(error => console.log(error));
+  .then(res => console.log(res))
+  .catch(error => console.log(error));
