@@ -97,10 +97,10 @@ implementación, sólo con la instalación. Permite el mismo uso de los argument
 mdLinks 'rutarelativa.md' //arroja los links encontrados, la ruta absoluta del archivo y el texto del link.//  
   
 
-mdLinks 'rutarelativa.md' --validate //además añade el estado del link (200, por ejemplo) y el estado 'ok' si funciona 'fail' si está roto.//  
+mdLinks 'rutarelativa.md' --validate //añade el estado del link (200, por ejemplo) y los estados 'ok' si funciona, 'fail' si está roto.//  
   
 
-mdLinks 'rutarelativa.md' --stats //entrega el número total de enlaces análizados, de enalces funcionales y de enlaces rotos.//  
+mdLinks 'rutarelativa.md' --stats //entrega el número total de enlaces analizados, de enlaces funcionales y de enlaces rotos.//  
   
 
 Admite también ambos argumentos al tiempo, dando toda la información en conjunto.  
