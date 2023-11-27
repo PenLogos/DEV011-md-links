@@ -110,3 +110,7 @@ Admite también ambos argumentos al tiempo, dando toda la información en conjun
 El paquete se vale de los [!CommonsJs-Modules](https://nodejs.org/api/path.html) y los [fs-Modules](https://nodejs.org/api/fs.html) de Node para las 
 funciones auxiliares del módulo principal. También se usa la librería de parseado 
 [!Markdown-it](https://markdown-it.github.io/markdown-it/).
+
+## 7. Disponible en nmp
+
+[Accede aquí](https://www.npmjs.com/package/penlogos-md-links)
