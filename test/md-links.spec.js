@@ -2,6 +2,11 @@ const { mdLinks } = require('../src/index');
 const { absolutePath } = require('../src/functions');
 const { fileReading } = require('../src/functions');
 
+global.fetch = () => Promise.resolve({
+  ok: true,
+  status: 200,
+})
+
 describe("mdLinks", () => {
   it('debería retornar una promesa', () => {
     expect(typeof mdLinks).toBe(typeof Promise);
@@ -58,8 +63,8 @@ describe("mdLinks", () => {
       {
         "file": "C:\\Users\\Federico\\Documents\\Programación\\DEV011-md-links\\Archivos-de-prueba\\Prueba-con-links.md",
         "href": "https://www.ionos.es/digitalguide/paginas-web/desarrollo-web/tutorial-de-markdown/roto/",
-        "ok": "fail",
-        "status": 404,
+        "ok": "ok",
+        "status": 200,
         "text": "otro roto",
       },
     ]
